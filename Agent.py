@@ -159,69 +159,12 @@ class Agent :
         self.updateRate()
 
 
-        # if feedbackOutcome:
-        #     #self.successes += 1
-        #
-        #     if seller in self.memory:
-        #         self.memory[seller]["currentSatisfaction"] = 1
-        #         self.memory[seller]["numberOfInteractions"] += 1
-        #     else:
-        #         self.memory[seller] = {"histSatisfaction" : 0 ,"currentSatisfaction" : 1, "numberOfInteractions" : 1}
-        #
-        # else:
-        #     #self.failures += 1
-        #     if seller in self.memory:
-        #         self.memory[seller]["currentSatisfaction"] = 0
-        #         self.memory[seller]["numberOfInteractions"] += 1
-        #     else:
-        #         self.memory[seller] = {"histSatisfaction" : 0 ,"currentSatisfaction" : 0, "numberOfInteractions" : 1}
-
-
-
 
         # updating the credibility of the witnesses for the best seller
 
         for witness in directTrustWitnesses[bestSeller]:
             self.updatingCredibility(witness, directTrustWitnesses[bestSeller], bestSeller, feedbackOutcome, overallTrustSellers[bestSeller])
 
-
-
-    # main functions
-    #---------------
-
-
-    # generating BPAs
-    #----------------
-
-
-    # With the satisfaction expression defined in the article
-
-    # def directBpa(self, witness, seller):
-    #     """
-    #     This method is calculating the direct mass function of the witness regarding the seller
-    #        Output : directTrust -- [ , , ]
-    #     """
-    #
-    #     if seller in witness.memory:
-    #         histSatisfaction = witness.memory[seller]["histSatisfaction"]
-    #         currentSatisfaction = witness.memory[seller]["currentSatisfaction"]
-    #
-    #         delta = abs( histSatisfaction - currentSatisfaction)
-    #         c = ( witness.memoryFactor * math.exp(histSatisfaction) ) / ( witness.memoryFactor * math.exp(histSatisfaction) + math.exp(delta) )  # the coefficient c
-    #
-    #         newSatisfaction = histSatisfaction * c + (1 - c) * currentSatisfaction
-    #         witness.memory[seller]["histSatisfaction"] = newSatisfaction
-    #         frequency = math.exp(-witness.memory[seller]["numberOfInteractions"] / self.time)
-    #
-    #         firstTerm = newSatisfaction * frequency
-    #         secondTerm = (1 - newSatisfaction) * frequency
-    #         thirdTerm = 1 -firstTerm - secondTerm
-    #
-    #         directTrust = [firstTerm, secondTerm, thirdTerm]
-    #     else :
-    #         directTrust = [0.45, 0.45, 0.1]
-    #
-    #     return directTrust
 
 
     # With the classical way of defining satisfaction
@@ -436,29 +379,6 @@ class Agent :
 
         return overallDistance
 
-
-    # Updating credibility with the method defined in the article
-
-    # def updatingCredibility(self,witness, witnesses,seller, feedback, BPA):
-    #
-    #     '''
-    #     the method is for updating credibilty according to the feedback outcome
-    #     '''
-    #
-    #     plausFunc = self.plausibilityFunction(witness, seller)
-    #     plausTrans = self.plausibilityTransform(plausFunc)
-    #
-    #
-    #     distance = self.distanceCredibility(witness, witnesses, seller, BPA)
-    #
-    #     if (feedback and plausTrans[0] >= 0.5) or (not feedback and plausTrans[0] < 0.5):  # if the result is positive
-    #         witness.credibility *= (1+distance) # to create the related functions
-    #
-    #     else :        # if the result is negative
-    #         witness.credibility *= (1 - distance)
-    #
-    #     if witness.credibility > 1:   # we force the credibility to be always in the range between 0 and 1
-    #         witness.credibility = 1
 
 
 
